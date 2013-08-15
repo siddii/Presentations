@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <style type="text/css">
+        input {
+            font-weight: bold;
+            font-size: 200%;
+        }
+        body {
+            padding: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        function GreetingsController($scope, $http) {
+            $scope.greetings = 'Hello World';
+            $scope.targetLanguage = 'es';
+
+            $scope.$watch('greetings + targetLanguage', function (){
+                $scope.capitalise();
+                $scope.translate();
+            });
+
+            $scope.capitalise = function () {
+                var splitGreetings = $scope.greetings.split(' ').map(function (item){
+                    return item.charAt(0).toUpperCase() + item.substring(1).toLowerCase();
+                });
+                $scope.capitalisedGreetings = splitGreetings.join(' ');
+            };
+
+            $scope.translate = function (){
+                $http.get('/translate?sl=en&tl='+ $scope.targetLanguage + '&text='+encodeURIComponent($scope.greetings)).success(function (response){
+                    $scope.translatedGreetings = response[0];
+                });
+            }
+        }
+    </script>
+</head>
+<body ng-app>
+    <div ng-controller="GreetingsController" style="border: 1px solid orangered">
+        <input type="text" placeholder="Say greetings..." ng-model="greetings"/>
+        <h3>You said - {{greetings}}</h3>
+        <h3>Capitalised - {{capitalisedGreetings}}</h3>
+        <select ng-model="targetLanguage">
+            <option value="es">Español</option>
+            <option value="ta">Tamil</option>
+            <option value="hi">Hindi</option>
+            <option value="it">Italian</option>
+            <option value="ja">Japanese</option>
+        </select>
+        <h3>Translated Greetings - {{translatedGreetings}}</h3>
+    </div>
+</body>
+</html>
