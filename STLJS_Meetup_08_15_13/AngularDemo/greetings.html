@@ -14,7 +14,7 @@
     </style>
     <script type="text/javascript">
         function GreetingsController($scope, $http) {
-            $scope.greetings = 'Hello World';
+            $scope.greetings = 'Hello!';
             $scope.targetLanguage = 'es';
 
             $scope.$watch('greetings + targetLanguage', function (){
@@ -38,7 +38,7 @@
     </script>
 </head>
 <body ng-app>
-    <div ng-controller="GreetingsController" style="border: 1px solid orangered">
+    <div ng-controller="GreetingsController" style="border: 3px solid darkgray;padding: 15px;">
         <input type="text" placeholder="Say greetings..." ng-model="greetings"/>
         <h3>You said - {{greetings}}</h3>
         <h3>Capitalised - {{capitalisedGreetings}}</h3>
