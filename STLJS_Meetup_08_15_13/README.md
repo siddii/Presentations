@@ -1,1 +1,1 @@
-###Sample code from St. Louis JavaScript Meetup August 15, 2013
+###Repository for code used in St. Louis JavaScript Meetup (August 15, 2013) presentation
